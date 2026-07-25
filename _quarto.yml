@@ -19,6 +19,10 @@ website:
         text: Wikidata
       - href: wikidata-item.ipynb
         text: Item Profile
+        
+author: 0009-0005-1600-0368
+name: zeinab maqsoudi
+affiliation: HsH
 
 format:
   html:
