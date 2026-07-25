@@ -1,0 +1,183 @@
+---
+title: "Ausstellungen Timeline"
+---
+
+Eine interaktive Übersicht aller Ausstellungen. Nutze die Filter, um nach Kurator:in zu filtern, einen Zeitraum einzugrenzen oder per Titel/Beschreibung zu suchen.
+
+```{ojs}
+//| echo: false
+mutable selectedExhibition = null
+```
+
+```{ojs}
+//| echo: false
+data = FileAttachment("exhibitions.csv").csv({typed: false})
+```
+
+```{ojs}
+//| echo: false
+parseDate = d3.timeParse("%Y-%m-%d")
+
+exhibitions = data.map(d => ({
+  ...d,
+  start: parseDate(d.start_date),
+  end: d.end_date ? parseDate(d.end_date) : parseDate(d.start_date),
+  curator: d.curator && d.curator.trim() !== "" ? d.curator.trim() : null
+})).filter(d => d.start)
+```
+
+```{ojs}
+//| echo: false
+curatorList = [...new Set(exhibitions.map(d => d.curator).filter(d => d))].sort()
+yearExtent = d3.extent(exhibitions.flatMap(d => [d.start, d.end]))
+minYear = yearExtent[0].getFullYear()
+maxYear = yearExtent[1].getFullYear()
+```
+
+### Filter
+
+```{ojs}
+//| echo: false
+viewof selectedCurator = Inputs.select(
+  ["Alle", ...curatorList],
+  {label: "Kurator:in", value: "Alle"}
+)
+```
+
+```{ojs}
+//| echo: false
+viewof searchText = Inputs.text({
+  label: "Suche (Titel / Beschreibung)",
+  placeholder: "z.B. Sammlung, Fotografie ..."
+})
+```
+
+```{ojs}
+//| echo: false
+viewof yearRange = Inputs.range([minYear, maxYear], {
+  label: "Startjahr ab",
+  step: 1,
+  value: minYear
+})
+```
+
+```{ojs}
+//| echo: false
+filtered = exhibitions.filter(d => {
+  const matchesCurator = selectedCurator === "Alle" || d.curator === selectedCurator
+  const matchesSearch = searchText.trim() === "" ||
+    (d.title + " " + d.description).toLowerCase().includes(searchText.toLowerCase())
+  const matchesYear = d.start.getFullYear() >= yearRange
+  return matchesCurator && matchesSearch && matchesYear
+}).sort((a, b) => a.start - b.start)
+```
+
+${filtered.length} von ${exhibitions.length} Ausstellungen angezeigt
+
+### Timeline
+
+```{ojs}
+//| echo: false
+chart = {
+  const margin = {top: 20, right: 40, bottom: 40, left: 200};
+  const rowHeight = 28;
+  const width = 960;
+  const height = Math.max(200, filtered.length * rowHeight + margin.top + margin.bottom);
+
+  const svg = d3.create("svg")
+    .attr("viewBox", [0, 0, width, height])
+    .attr("width", width)
+    .attr("height", height)
+    .attr("style", "max-width: 100%; height: auto; font: 12px sans-serif;");
+
+  if (filtered.length === 0) {
+    svg.append("text")
+      .attr("x", width / 2).attr("y", height / 2)
+      .attr("text-anchor", "middle")
+      .text("Keine Ausstellungen fuer diese Filter gefunden.");
+    return svg.node();
+  }
+
+  const xExtent = d3.extent(filtered.flatMap(d => [d.start, d.end]));
+  const xPad = 30 * 24 * 60 * 60 * 1000; // 30 Tage Padding
+  const x = d3.scaleTime()
+    .domain([new Date(xExtent[0] - xPad), new Date(xExtent[1] + xPad)])
+    .range([margin.left, width - margin.right]);
+
+  const y = d3.scaleBand()
+    .domain(filtered.map(d => d.qid))
+    .range([margin.top, height - margin.bottom])
+    .padding(0.3);
+
+  // Adaptive Tick-Strategie je nach Zeitspanne
+  const spanYears = (xExtent[1] - xExtent[0]) / (365.25 * 24 * 60 * 60 * 1000);
+  const tickInterval = spanYears <= 2 ? d3.timeMonth.every(1)
+                     : spanYears <= 5 ? d3.timeMonth.every(3)
+                     : d3.timeYear.every(1);
+  const tickFmt = spanYears <= 2
+    ? d => d.getMonth() === 0 ? d3.timeFormat("%b %Y")(d) : d3.timeFormat("%b")(d)
+    : spanYears <= 5
+    ? d => d.getMonth() === 0 ? d3.timeFormat("%Y")(d) : d3.timeFormat("%b")(d)
+    : d3.timeFormat("%Y");
+
+  svg.append("g")
+    .attr("transform", `translate(0,${margin.top})`)
+    .call(d3.axisTop(x).ticks(tickInterval).tickFormat(tickFmt))
+    .call(g => g.select(".domain").remove());
+
+  svg.append("g")
+    .attr("stroke", "#e0e0e0")
+    .selectAll("line")
+    .data(x.ticks(tickInterval))
+    .join("line")
+      .attr("x1", d => x(d)).attr("x2", d => x(d))
+      .attr("y1", margin.top).attr("y2", height - margin.bottom);
+
+  svg.append("g")
+    .selectAll("text")
+    .data(filtered)
+    .join("text")
+      .attr("x", margin.left - 10)
+      .attr("y", d => y(d.qid) + y.bandwidth() / 2)
+      .attr("dy", "0.35em")
+      .attr("text-anchor", "end")
+      .attr("font-size", "11px")
+      .text(d => d.title.length > 35 ? d.title.slice(0, 35) + "..." : d.title);
+
+  svg.append("g")
+    .selectAll("rect")
+    .data(filtered)
+    .join("rect")
+      .attr("x", d => x(d.start))
+      .attr("y", d => y(d.qid))
+      .attr("width", d => Math.max(3, x(d.end) - x(d.start)))
+      .attr("height", y.bandwidth())
+      .attr("fill", "#3b6e8f")
+      .attr("rx", 3)
+      .attr("cursor", "pointer")
+      .on("click", (event, d) => { mutable selectedExhibition = d; })
+      .on("mouseenter", function() { d3.select(this).attr("fill", "#1d3f55"); })
+      .on("mouseleave", function() { d3.select(this).attr("fill", "#3b6e8f"); })
+    .append("title")
+      .text(d => `${d.title}\n${d.start_date} - ${d.end_date || d.start_date}${d.curator ? "\nKurator:in: " + d.curator : ""}`);
+
+  return svg.node();
+}
+```
+
+### Details
+
+```{ojs}
+//| echo: false
+selectedExhibition === null
+  ? md`*Klicke auf einen Balken in der Timeline, um Details anzuzeigen.*`
+  : md`### ${selectedExhibition.title}
+
+**Zeitraum:** ${selectedExhibition.start_date} - ${selectedExhibition.end_date || selectedExhibition.start_date}
+
+**Ort:** ${selectedExhibition.location}${selectedExhibition.curator ? "  \n**Kurator:in:** " + selectedExhibition.curator : ""}
+
+${selectedExhibition.description}
+
+[Museums-Website](${selectedExhibition.museum_url}) · [Wikidata](${selectedExhibition.wikidata_url})`
+```
