@@ -2,20 +2,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.37">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="0009-0005-1600-0368">
 
 <title>Wikidata Item Profile – BIM Prototype 02</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -39,10 +43,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-7ee132498c61da618cb63d6ce2648d66.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-67daaa7896f33cc2219aa98eaadded8d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -134,6 +138,12 @@ ul.task-list li input[type="checkbox"] {
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>0009-0005-1600-0368 </p>
+          </div>
+  </div>
     
   
     
@@ -149,11 +159,11 @@ ul.task-list li input[type="checkbox"] {
 <p>This notebook-backed page queries Wikidata with SPARQL and renders a styled HTML profile.</p>
 <p>To profile another item, change the <code>item_id</code> value in Cell 3 and re-render the site.</p>
 <p>https://www.sprengel-museum.de/ausstellungen/aktuell/abenteuer-abstraktion</p>
-<div id="2c369ca0" class="cell" data-execution_count="6">
-<section id="sparql-query-used-for-q138572982" class="level2 cell-output cell-output-display cell-output-markdown" data-execution_count="6">
-<h2 class="anchored" data-anchor-id="sparql-query-used-for-q138572982">SPARQL Query Used for Q138572982</h2>
+<div id="2c369ca0" class="cell" data-execution_count="2">
+<section id="sparql-query-used-for-q140694450" class="level2 cell-output cell-output-display cell-output-markdown" data-execution_count="2">
+<h2 class="anchored" data-anchor-id="sparql-query-used-for-q140694450">SPARQL Query Used for Q140694450</h2>
 <pre class="sparql"><code>SELECT ?property ?propertyLabel ?value ?valueLabel WHERE {
-  BIND(wd:Q138572982 AS ?item)
+  BIND(wd:Q140694450 AS ?item)
   ?item ?p ?statement .
   ?property wikibase:claim ?p .
   ?statement ?ps ?value .
@@ -164,13 +174,13 @@ ul.task-list li input[type="checkbox"] {
 ORDER BY ?propertyLabel</code></pre>
 </section>
 </div>
-<div id="eaae8030" class="cell" data-execution_count="7">
-<div class="cell-output cell-output-display" data-execution_count="7">
-<pre><code>17</code></pre>
+<div id="eaae8030" class="cell" data-execution_count="3">
+<div class="cell-output cell-output-display" data-execution_count="3">
+<pre><code>6</code></pre>
 </div>
 </div>
-<div id="f0195f22" class="cell" data-execution_count="8">
-<div class="cell-output cell-output-display" data-execution_count="8">
+<div id="f0195f22" class="cell" data-execution_count="4">
+<div class="cell-output cell-output-display" data-execution_count="4">
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap');
@@ -424,28 +434,28 @@ ORDER BY ?propertyLabel</code></pre>
     <p class="wd-header-eyebrow">Catalogue Entry</p>
     <h2 class="anchored">Wikidata Statement Profile</h2>
     <div class="wd-header-meta">
-      <span>Object ID&nbsp;<strong>Q138572982</strong></span>
-      <span>Statements&nbsp;<strong>17</strong></span>
-      <span>Retrieved&nbsp;<strong>2026-05-07 06:18 UTC</strong></span>
-      <span><a href="https://www.wikidata.org/wiki/Q138572982" target="_blank" rel="noopener">View source record ↗</a></span>
+      <span>Object ID&nbsp;<strong>Q140694450</strong></span>
+      <span>Statements&nbsp;<strong>6</strong></span>
+      <span>Retrieved&nbsp;<strong>2026-07-25 12:49 UTC</strong></span>
+      <span><a href="https://www.wikidata.org/wiki/Q140694450" target="_blank" rel="noopener">View source record ↗</a></span>
     </div>
   </header>
 
   <div class="wd-stat-row">
     <div class="wd-stat">
-      <span class="wd-stat-value">17</span>
+      <span class="wd-stat-value">6</span>
       <span class="wd-stat-label">Statements</span>
     </div>
     <div class="wd-stat">
-      <span class="wd-stat-value">8</span>
+      <span class="wd-stat-value">6</span>
       <span class="wd-stat-label">Properties</span>
     </div>
     <div class="wd-stat">
-      <span class="wd-stat-value">13</span>
+      <span class="wd-stat-value">3</span>
       <span class="wd-stat-label">Entity values</span>
     </div>
     <div class="wd-stat">
-      <span class="wd-stat-value">4</span>
+      <span class="wd-stat-value">3</span>
       <span class="wd-stat-label">Literal values</span>
     </div>
   </div>
@@ -453,19 +463,19 @@ ORDER BY ?propertyLabel</code></pre>
   <section class="wd-insights">
     <div class="wd-panel">
       <p class="wd-panel-title">Properties by statement count</p>
-      <div class="wd-bars"><div class="wd-bar-row"><div class="wd-bar-label">main subject</div><div class="wd-bar-track"><div class="wd-bar-fill" style="width:100%;background:#1d4ed8"></div></div><div class="wd-bar-value">9</div></div><div class="wd-bar-row"><div class="wd-bar-label">title</div><div class="wd-bar-track"><div class="wd-bar-fill" style="width:22%;background:#1d4ed8"></div></div><div class="wd-bar-value">2</div></div><div class="wd-bar-row"><div class="wd-bar-label">curator</div><div class="wd-bar-track"><div class="wd-bar-fill" style="width:11%;background:#1d4ed8"></div></div><div class="wd-bar-value">1</div></div><div class="wd-bar-row"><div class="wd-bar-label">end time</div><div class="wd-bar-track"><div class="wd-bar-fill" style="width:11%;background:#1d4ed8"></div></div><div class="wd-bar-value">1</div></div><div class="wd-bar-row"><div class="wd-bar-label">instance of</div><div class="wd-bar-track"><div class="wd-bar-fill" style="width:11%;background:#1d4ed8"></div></div><div class="wd-bar-value">1</div></div><div class="wd-bar-row"><div class="wd-bar-label">location</div><div class="wd-bar-track"><div class="wd-bar-fill" style="width:11%;background:#1d4ed8"></div></div><div class="wd-bar-value">1</div></div><div class="wd-bar-row"><div class="wd-bar-label">official website</div><div class="wd-bar-track"><div class="wd-bar-fill" style="width:11%;background:#1d4ed8"></div></div><div class="wd-bar-value">1</div></div><div class="wd-bar-row"><div class="wd-bar-label">start time</div><div class="wd-bar-track"><div class="wd-bar-fill" style="width:11%;background:#1d4ed8"></div></div><div class="wd-bar-value">1</div></div></div>
+      <div class="wd-bars"><div class="wd-bar-row"><div class="wd-bar-label">end time</div><div class="wd-bar-track"><div class="wd-bar-fill" style="width:100%;background:#1d4ed8"></div></div><div class="wd-bar-value">1</div></div><div class="wd-bar-row"><div class="wd-bar-label">instance of</div><div class="wd-bar-track"><div class="wd-bar-fill" style="width:100%;background:#1d4ed8"></div></div><div class="wd-bar-value">1</div></div><div class="wd-bar-row"><div class="wd-bar-label">location</div><div class="wd-bar-track"><div class="wd-bar-fill" style="width:100%;background:#1d4ed8"></div></div><div class="wd-bar-value">1</div></div><div class="wd-bar-row"><div class="wd-bar-label">official website</div><div class="wd-bar-track"><div class="wd-bar-fill" style="width:100%;background:#1d4ed8"></div></div><div class="wd-bar-value">1</div></div><div class="wd-bar-row"><div class="wd-bar-label">start time</div><div class="wd-bar-track"><div class="wd-bar-fill" style="width:100%;background:#1d4ed8"></div></div><div class="wd-bar-value">1</div></div><div class="wd-bar-row"><div class="wd-bar-label">title</div><div class="wd-bar-track"><div class="wd-bar-fill" style="width:100%;background:#1d4ed8"></div></div><div class="wd-bar-value">1</div></div></div>
     </div>
     <div class="wd-panel">
       <p class="wd-panel-title">Value type breakdown</p>
       
     <div class="wd-kind-wrap">
       <div class="wd-kind-bar">
-        <div class="wd-kind-entity" style="width:76%"></div>
-        <div class="wd-kind-literal" style="width:24%"></div>
+        <div class="wd-kind-entity" style="width:50%"></div>
+        <div class="wd-kind-literal" style="width:50%"></div>
       </div>
       <div class="wd-kind-legend">
-        <span><span class="wd-kind-swatch" style="background:#1a1a18"></span><strong>13</strong> Entity values</span>
-        <span><span class="wd-kind-swatch" style="background:#c5a882"></span><strong>4</strong> Literal values</span>
+        <span><span class="wd-kind-swatch" style="background:#1a1a18"></span><strong>3</strong> Entity values</span>
+        <span><span class="wd-kind-swatch" style="background:#c5a882"></span><strong>3</strong> Literal values</span>
       </div>
     </div>
     
@@ -476,13 +486,8 @@ ORDER BY ?propertyLabel</code></pre>
   <section class="wd-grid">
     
             <section class="wd-card">
-              <h3 class="anchored">curator</h3>
-              <ul><li><a href="http://www.wikidata.org/entity/Q113782935" target="_blank" rel="noopener">Inka Schube</a></li></ul>
-            </section>
-            
-            <section class="wd-card">
               <h3 class="anchored">end time</h3>
-              <ul><li>2024-11-17T00:00:00Z</li></ul>
+              <ul><li>2025-04-13T00:00:00Z</li></ul>
             </section>
             
             <section class="wd-card">
@@ -496,23 +501,18 @@ ORDER BY ?propertyLabel</code></pre>
             </section>
             
             <section class="wd-card">
-              <h3 class="anchored">main subject</h3>
-              <ul><li><a href="http://www.wikidata.org/entity/Q4768237" target="_blank" rel="noopener">Anne Collier</a></li><li><a href="http://www.wikidata.org/entity/Q53869219" target="_blank" rel="noopener">Dörte Eißfeldt</a></li><li><a href="http://www.wikidata.org/entity/Q4493559" target="_blank" rel="noopener">Seiichi Furuya</a></li><li><a href="http://www.wikidata.org/entity/Q99383860" target="_blank" rel="noopener">Christina Glanz</a></li><li><a href="http://www.wikidata.org/entity/Q320241" target="_blank" rel="noopener">Rodney Graham</a></li><li><a href="http://www.wikidata.org/entity/Q23772152" target="_blank" rel="noopener">Annette Kelm</a></li><li><a href="http://www.wikidata.org/entity/Q77287944" target="_blank" rel="noopener">Andrzej Steinbach</a></li><li><a href="http://www.wikidata.org/entity/Q55236331" target="_blank" rel="noopener">Raphaela Vogel</a></li><li><a href="http://www.wikidata.org/entity/Q133676645" target="_blank" rel="noopener">Q133676645</a></li></ul>
-            </section>
-            
-            <section class="wd-card">
               <h3 class="anchored">official website</h3>
-              <ul><li><a href="https://www.sprengel-museum.de/ausstellungen/archiv/das-bild-ist-was-es-tut" target="_blank" rel="noopener">https://www.sprengel-museum.de/ausstellungen/archiv/das-bild-ist-was-es-tut</a></li></ul>
+              <ul><li><a href="https://www.sprengel-museum.de/ausstellungen/archiv/lillien-grupe" target="_blank" rel="noopener">https://www.sprengel-museum.de/ausstellungen/archiv/lillien-grupe</a></li></ul>
             </section>
             
             <section class="wd-card">
               <h3 class="anchored">start time</h3>
-              <ul><li>2024-08-21T00:00:00Z</li></ul>
+              <ul><li>2025-01-01T00:00:00Z</li></ul>
             </section>
             
             <section class="wd-card">
               <h3 class="anchored">title</h3>
-              <ul><li>Das Bild ist, was es tut</li><li>Das Bild ist, was es tut</li></ul>
+              <ul><li>Lillien Grupe. Realitäte(n)</li></ul>
             </section>
             
   </section>
@@ -523,7 +523,7 @@ ORDER BY ?propertyLabel</code></pre>
 <section id="visualizing-the-wikidata-item-as-a-graph" class="level2">
 <h2 class="anchored" data-anchor-id="visualizing-the-wikidata-item-as-a-graph">Visualizing the Wikidata Item as a Graph</h2>
 <p>The following cell renders a graph visualization of the relationships for the selected Wikidata item. This helps to see how the item is connected to other entities via its properties.</p>
-<div id="01c8542d" class="cell" data-execution_count="9">
+<div id="01c8542d" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
