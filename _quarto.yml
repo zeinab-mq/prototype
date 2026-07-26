@@ -11,6 +11,8 @@ website:
   title: "BIM Prototype 02"
   navbar:
     left:
+      - text: "Ausstellungen Timeline"
+        href: timeline.qmd
       - href: index.qmd
         text: Home
       - href: project-log.qmd
